@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 25%),
+        radial-gradient(circle at top right, rgba(124, 58, 237, 0.18), transparent 25%),
+        linear-gradient(180deg, #0f172a, #111827 55%, #0b1120);
+    color: white;
+    overflow-x: hidden;
+}
+
+.appShell {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.contentWrapper {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 120px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 30px;
+}
+
+.animatedSection {
+    width: 100%;
+    max-width: 1300px;
+    animation: sectionFadeSlide 0.45s ease;
+}
+
+@keyframes sectionFadeSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(22px) scale(0.985);
+        filter: blur(6px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .contentWrapper {
+        padding-top: 160px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contentWrapper {
+        padding-top: 170px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}

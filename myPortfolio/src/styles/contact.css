@@ -1,0 +1,253 @@
+.contactSection {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.3fr);
+    gap: 24px;
+    box-sizing: border-box;
+    align-items: stretch;
+}
+
+.contactInfoCard,
+.contactFormCard {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 30px;
+    border-radius: 26px;
+    box-sizing: border-box;
+
+    background:
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.14), transparent 30%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.96));
+
+    border: 1px solid rgba(148, 163, 184, 0.14);
+
+    box-shadow:
+        0 14px 32px rgba(0, 0, 0, 0.20),
+        0 26px 60px rgba(0, 0, 0, 0.24);
+}
+
+.contactAccentBar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    background: linear-gradient(180deg, #38bdf8, #6366f1, #8b5cf6);
+    box-shadow: 0 0 18px rgba(99, 102, 241, 0.35);
+}
+
+.contactInfoCard {
+    padding-left: 38px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.contactBadge {
+    width: fit-content;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #dbeafe;
+    background: rgba(37, 99, 235, 0.16);
+    border: 1px solid rgba(147, 197, 253, 0.18);
+}
+
+.contactInfoCard h3 {
+    margin: 0;
+    font-size: 1.7rem;
+    font-weight: 900;
+    line-height: 1.2;
+    color: #f8fafc;
+}
+
+.contactInfoCard > p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #cbd5e1;
+}
+
+.contactInfoList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.contactInfoItem {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+a.contactInfoItem {
+    cursor: pointer;
+}
+
+.contactInfoItem:hover {
+    transform: translateX(4px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(125, 211, 252, 0.24);
+}
+
+.contactInfoIcon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7dd3fc;
+    background: rgba(125, 211, 252, 0.10);
+    border: 1px solid rgba(125, 211, 252, 0.16);
+}
+
+.contactInfoItem div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.contactInfoLabel {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: #7dd3fc;
+}
+
+.contactInfoValue {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    overflow-wrap: anywhere;
+}
+
+.contactFormCard {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.formGroup label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #cbd5e1;
+}
+
+.formGroup input,
+.formGroup textarea {
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+    color: #f8fafc;
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.formGroup textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+    color: #64748b;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+    border-color: rgba(125, 211, 252, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.14);
+}
+
+.contactSubmitButton {
+    margin-top: 4px;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid rgba(125, 211, 252, 0.18);
+    outline: none;
+    cursor: pointer;
+    border-radius: 16px;
+    padding: 14px 22px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #f8fafc;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(99, 102, 241, 0.22));
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contactSubmitButton:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.32), rgba(99, 102, 241, 0.32));
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+}
+
+.contactSentNotice {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #86efac;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .contactSection {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .contactSection {
+        padding: 14px;
+        gap: 18px;
+    }
+
+    .contactInfoCard,
+    .contactFormCard {
+        padding: 22px 18px;
+        border-radius: 20px;
+    }
+
+    .contactInfoCard {
+        padding-left: 26px;
+    }
+
+    .contactInfoCard h3 {
+        font-size: 1.4rem;
+    }
+
+    .contactSubmitButton {
+        width: 100%;
+    }
+}
