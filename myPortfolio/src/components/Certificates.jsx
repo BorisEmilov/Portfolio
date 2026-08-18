@@ -5,6 +5,8 @@ import { SiScrimba } from "react-icons/si";
 import { SiCoursera } from "react-icons/si";
 import { FaMeta } from "react-icons/fa6";
 import { FaCode } from "react-icons/fa";
+import ualbertaLogo from '../assets/university-of-alberta-logo.svg';
+
 
 
 const Certificates = () => {
@@ -18,17 +20,12 @@ const Certificates = () => {
                     <section className='certificatesContainer'>
                         <div className='certificateCard' onClick={() => window.open('https://www.coursera.org/account/accomplishments/specialization/8FSA5U7NHNS2?utm_source=mobile&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta', '_blank', 'noopener,noreferrer')}>
                             <div className='certificateTop'>
-                                <FaCode size={52} color='red'  />
+                                <img src={ualbertaLogo} alt="University of Alberta" className='certificateLogo' />
                                 <span className='certificateBadge'>Certificate</span>
                             </div>
-                            <h3>𝘿𝙚𝙫𝙊𝙥𝙨</h3>
+                            <h3>𝘼𝙧𝙘𝙝𝙞𝙩𝙚𝙘𝙩𝙪𝙧𝙚 𝙖𝙣𝙙 𝙎𝙤𝙛𝙩𝙬𝙖𝙧𝙚 𝙙𝙚𝙨𝙞𝙜𝙣</h3>
                             <div className='tagsContainer'>
-                                <div className='tag'>Linux</div>
-                                <div className='tag'>Doker</div>
-                                <div className='tag'>Kubernets</div>
-                                <div className='tag'>Git</div>
-                                <div className='tag'>CI/CD</div>
-                                <div className='tag'>IaC</div>
+                                <div className='tag'>Java</div>
                             </div>
                         </div>
                         <div className='certificateCard' onClick={() => window.open('https://www.coursera.org/account/accomplishments/specialization/8FSA5U7NHNS2?utm_source=mobile&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta', '_blank', 'noopener,noreferrer')}>
