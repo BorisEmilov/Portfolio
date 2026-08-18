@@ -113,6 +113,7 @@ const Projects = () => {
                                     <div className="githubProjectTags">
                                         <span>JavaScript</span>
                                         <span>Excell</span>
+                                        <span>Data Analisys</span>
                                     </div>
                                 </div>
         
