@@ -3,6 +3,7 @@ import '../styles/home.css'
 import { FaReact } from "react-icons/fa";
 import { FaNodeJs } from "react-icons/fa";
 import { FaGithub, FaArrowRight } from 'react-icons/fa'
+import { FaPython, FaServer } from "react-icons/fa";
 import { IoLogoJavascript } from "react-icons/io";
 import { SiNestjs } from "react-icons/si";
 
@@ -18,9 +19,9 @@ const Projects = () => {
                     <section className="mainProjectSection">
                         <div className="mainProjectHeader">
                             <span className="mainProjectMiniTitle">Currently Developing</span>
-                            <h2 className="mainProjectTitle">Main Project</h2>
+                            <h2 className="mainProjectTitle">Main Projects</h2>
                             <p className="projectsGithubSubtitle">
-                                The project I'm actively building right now.
+                                The projects I'm actively building right now.
                             </p>
                         </div>
 
@@ -59,6 +60,98 @@ const Projects = () => {
                                     <span>PostgreSQL</span>
                                     <span>Redis</span>
                                     <span>JWT Auth</span>
+                                </div>
+                            </div>
+
+                            <div className="githubProjectRight">
+                                <div className="githubVisitButton">
+                                    <span>View Repo</span>
+                                    <FaArrowRight size={14} />
+                                </div>
+                            </div>
+                        </article>
+
+                        <article
+                            className="mainProjectCard"
+                            onClick={() => window.open('https://github.com/BorisEmilov/TradingAI', '_blank', 'noopener,noreferrer')}
+                        >
+                            <div className="githubAccentBar mainProjectAccentBar"></div>
+
+                            <div className="githubProjectLeft">
+                                <div className="githubMainIcon">
+                                    <FaGithub size={34} />
+                                </div>
+
+                                <div className="githubProjectTechIcon">
+                                    <FaPython size={28} />
+                                </div>
+                            </div>
+
+                            <div className="githubProjectContent">
+                                <div className="githubProjectTop">
+                                    <h3>TradingAI</h3>
+                                    <span className="githubProjectStatus mainProjectStatus">In Development</span>
+                                </div>
+
+                                <p>
+                                    Fully autonomous AI trading system that connects directly to MetaTrader 5 (MT5)
+                                    and executes trades based on institutional trading strategies, including Smart
+                                    Money Concepts (SMC), ICT, and Elliott Wave theory. It performs technical
+                                    analysis on live charts and autonomously executes trades based on its own
+                                    predictions, with no manual intervention required.
+                                </p>
+
+                                <div className="githubProjectTags">
+                                    <span>Python</span>
+                                    <span>MetaTrader 5</span>
+                                    <span>Algorithmic Trading</span>
+                                    <span>SMC / ICT</span>
+                                    <span>Elliott Wave</span>
+                                    <span>Technical Analysis</span>
+                                </div>
+                            </div>
+
+                            <div className="githubProjectRight">
+                                <div className="githubVisitButton">
+                                    <span>View Repo</span>
+                                    <FaArrowRight size={14} />
+                                </div>
+                            </div>
+                        </article>
+
+                        <article
+                            className="mainProjectCard"
+                            onClick={() => window.open('https://github.com/BorisEmilov/AITrading_API', '_blank', 'noopener,noreferrer')}
+                        >
+                            <div className="githubAccentBar mainProjectAccentBar"></div>
+
+                            <div className="githubProjectLeft">
+                                <div className="githubMainIcon">
+                                    <FaGithub size={34} />
+                                </div>
+
+                                <div className="githubProjectTechIcon">
+                                    <FaServer size={28} />
+                                </div>
+                            </div>
+
+                            <div className="githubProjectContent">
+                                <div className="githubProjectTop">
+                                    <h3>AITrading API</h3>
+                                    <span className="githubProjectStatus mainProjectStatus">In Development</span>
+                                </div>
+
+                                <p>
+                                    Backend integration for TradingAI. Exposes the trading engine's chart analysis,
+                                    predictions, and trade execution through an API, handling the connection between
+                                    the autonomous trading AI and external services.
+                                </p>
+
+                                <div className="githubProjectTags">
+                                    <span>Python</span>
+                                    <span>API</span>
+                                    <span>Backend</span>
+                                    <span>Integration</span>
                                 </div>
                             </div>
 
