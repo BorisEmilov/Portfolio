@@ -7,6 +7,7 @@ const Navbar = ({ activeSection, setActiveSection }) => {
         'Skills',
         'Certificates',
         'Projects',
+        'DeployedProjects',
         'ContactMe'
     ]
 

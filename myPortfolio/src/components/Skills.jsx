@@ -18,7 +18,10 @@ import { SiJsonwebtokens } from "react-icons/si";
 import { FaPassport } from "react-icons/fa";
 import { TbBrandOauth } from "react-icons/tb";
 import { FaCookieBite } from "react-icons/fa";
-import { FaLinux, FaJenkins, FaJava, FaAngular } from "react-icons/fa";
+import { FaLinux, FaJenkins, FaAngular } from "react-icons/fa";
+import { TbBrandCSharp } from "react-icons/tb";
+import { SiDotnet } from "react-icons/si";
+import { BsDatabaseGear } from "react-icons/bs";
 import { IoIosGitNetwork } from "react-icons/io";
 import { TbBrandRedux } from "react-icons/tb";
 import { DiRedis } from "react-icons/di";
@@ -59,7 +62,9 @@ const Skills = () => {
                                 <div className='iconCard'><SiExpress size={40} color='#1b1405' /><span>Express</span></div>
                                 <div className='iconCard'><SiNestjs size={40} color='#c1121f' /><span>NestJS</span></div>
                                 <div className='iconCard'><FaNodeJs size={40} color='#003049' /><span>Node.js</span></div>
-                                <div className='iconCard'><FaJava size={40} color='#0d1321' /><span>Java</span></div>
+                                <div className='iconCard'><TbBrandCSharp size={40} color='#68217a' /><span>C#</span></div>
+                                <div className='iconCard'><SiDotnet size={40} color='#512bd4' /><span>.NET Core</span></div>
+                                <div className='iconCard'><BsDatabaseGear size={40} color='#6c4fbf' /><span>Entity Framework</span></div>
                                 <div className='iconCard'><SiPostman size={40} color='#e0634d' /><span>Postman</span></div>
                                 <div className='iconCard'><MdArchitecture size={40} color='#6951d2' /><span>Architecture & software design</span></div>
                             </div>

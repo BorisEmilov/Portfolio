@@ -5,6 +5,7 @@ import AboutMe from '../src/components/AboutMe'
 import Skills from '../src/components/Skills'
 import Certificates from './components/Certificates'
 import Projects from './components/Projects'
+import DeployedProjects from './components/DeployedProjects'
 import ContactMe from './components/ContactMe'
 import './app.css'
 
@@ -21,6 +22,8 @@ function App() {
                 return <Certificates />
             case 'Projects':
                 return <Projects />
+            case 'DeployedProjects':
+                return <DeployedProjects />
             case 'ContactMe':
                 return <ContactMe />
             default:
