@@ -18,7 +18,7 @@ import { SiJsonwebtokens } from "react-icons/si";
 import { FaPassport } from "react-icons/fa";
 import { TbBrandOauth } from "react-icons/tb";
 import { FaCookieBite } from "react-icons/fa";
-import { FaLinux, FaJenkins, FaAngular } from "react-icons/fa";
+import { FaLinux, FaJenkins } from "react-icons/fa";
 import { TbBrandCSharp } from "react-icons/tb";
 import { SiDotnet } from "react-icons/si";
 import { BsDatabaseGear } from "react-icons/bs";
@@ -47,7 +47,6 @@ const Skills = () => {
                             <h2>𝙁𝙧𝙤𝙣𝙩𝙀𝙣𝙙 𝙎𝙠𝙞𝙡𝙡𝙨</h2>
                             <div className='iconContainer'>
                                 <div className='iconCard'><FaReact size={40} color='#4895ef' /><span>React</span></div>
-                                <div className='iconCard'><FaAngular size={40} color='#dc0a0a' /><span>Angular</span></div>
                                 <div className='iconCard'><FaHtml5 size={40} color='#d00000' /><span>HTML5</span></div>
                                 <div className='iconCard'><FaCss3Alt size={40} color='#3183e1' /><span>CSS3</span></div>
                                 <div className='iconCard'><TbBrandRedux size={40} color='#48258e' /><span>Redux</span></div>
