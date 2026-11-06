@@ -6,106 +6,51 @@ import { SiDotnet } from 'react-icons/si'
 
 const BIMLINT_URL = 'https://bimlint.com'
 
-const stats = [
-    { value: '~26k', label: 'Lines of C# (backend + tests)' },
-    { value: '~6.3k', label: 'Lines of TypeScript (frontend)' },
-    { value: '~210', label: 'Automated tests' },
-    { value: '10', label: 'ADRs' },
+const steps = [
+    {
+        title: '1. Upload',
+        text: 'The user uploads the IFC file exported from their design tool (Revit, ArchiCAD, Allplan, BricsCAD...).',
+    },
+    {
+        title: '2. Extract',
+        text: 'The system extracts every element, its properties, its location in the building and the relevant geometry.',
+    },
+    {
+        title: '3. Check',
+        text: 'A rule pack runs data-quality checks ("every door has a fire rating"), information requirements ("every space has a name and use") and code checks ("accessible doors are wide enough", "the evacuation route is within the limit").',
+    },
+    {
+        title: '4. Review',
+        text: 'Issues appear in a list and on the 3D model in the browser: click an issue and the camera flies to the problem element.',
+    },
+    {
+        title: '5. Compare',
+        text: 'When the next version is uploaded, BIMLint shows which issues were resolved, which persist and which are new.',
+    },
 ]
 
 const highlights = [
     {
-        title: 'Compiled rule engine',
-        text: 'JSON rules compiled to Expression Trees and validated against an interpreter with differential testing (10,000 cases). Regex uses NonBacktracking to guard against ReDoS. 2–3x faster than the interpreter with 0 B allocated per evaluation.',
-    },
-    {
-        title: 'High-throughput ingestion',
-        text: 'Streaming PostgreSQL binary COPY loads 50,000 elements in 480 ms vs 3,428 ms with EF Core: ~7x faster with ~40x less memory.',
-    },
-    {
-        title: 'Evacuation routes',
-        text: 'Multi-source Dijkstra from all exits at once, over points sampled inside each space.',
-    },
-    {
-        title: 'Robust IFC extractor',
-        text: 'Tolerates truncated files, invalid GUIDs, broken references and cycles without crashing the worker.',
-    },
-    {
-        title: 'Version-to-version diffing',
-        text: 'Each issue gets a fingerprint (rule + GlobalId), so new versions show resolved, persisting and new issues, and reviewer decisions carry over.',
+        title: 'Configurable rule engine',
+        text: 'Rules are defined as JSON instead of hard-coded, so new checks can be added or adjusted without touching the code.',
     },
     {
         title: 'Background processing',
-        text: 'Workers with separate queues by memory footprint, a distributed Redis lock and real-time progress over SignalR.',
-    },
-    {
-        title: 'Direct-to-S3 uploads',
-        text: 'Presigned URLs and SHA-256 deduplication, with the hash computed in the browser.',
-    },
-    {
-        title: 'Security',
-        text: 'Multi-tenant; in-memory JWT plus rotating refresh tokens with reuse detection; immediate revocation; distributed rate limiting on Redis.',
+        text: 'Large models are processed in background jobs, with live progress sent to the browser via SignalR.',
     },
     {
         title: 'Complete SaaS',
-        text: 'Free, Professional (€49/mo) and Studio (€149/mo) plans billed with Stripe, teams, share links and an admin panel with rule versioning and audit log.',
+        text: 'Authentication, teams, Stripe subscriptions and PDF reports. Dockerized and deployed with CI/CD on GitHub Actions.',
     },
 ]
 
 const stack = [
-    {
-        group: 'Backend',
-        items: ['.NET 10', 'C#', 'ASP.NET Core Minimal APIs', 'EF Core', 'SignalR', 'Hangfire', 'xBIM', 'QuestPDF', 'Stripe'],
-    },
-    {
-        group: 'Data & Infrastructure',
-        items: ['PostgreSQL 17 (jsonb + GIN)', 'Redis 7', 'S3-compatible storage (Cloudflare R2)'],
-    },
-    {
-        group: 'Frontend',
-        items: ['React 19', 'TypeScript', 'Vite', 'TanStack Query', 'zustand', 'Tailwind CSS 4', 'three.js', 'web-ifc (Web Worker)'],
-    },
-    {
-        group: 'DevOps',
-        items: ['Docker (multi-arch)', 'Docker Compose', 'Caddy', 'GitHub Actions (CI + deploy)', 'Hetzner VPS', 'Testcontainers'],
-    },
-    {
-        group: 'Architecture',
-        items: ['Clean / hexagonal (6 projects)', 'Decisions documented in ADRs'],
-    },
+    { group: 'Backend', items: ['.NET', 'C#', 'ASP.NET Core', 'EF Core', 'SignalR', 'Hangfire'] },
+    { group: 'Frontend', items: ['React', 'TypeScript', 'Tailwind CSS', 'three.js'] },
+    { group: 'Data & DevOps', items: ['PostgreSQL', 'Redis', 'Docker', 'GitHub Actions'] },
 ]
 
-const countries = [
-    'Spain (CTE DB-SI, DB-SUA, habitability & zoning)',
-    'United Kingdom',
-    'USA (IBC / ADA)',
-    'Germany',
-    'France',
-    'Portugal',
-    'Bulgaria',
-    'Mexico',
-    'Argentina',
-    'Brazil',
-    'Chile',
-]
-
-const features = [
-    'Landing',
-    'Sign up & login',
-    'Projects & versions',
-    '3D viewer with issues',
-    'Filterable issue list',
-    'Version comparison',
-    'Clash detection',
-    'Documents',
-    'Team',
-    'Sharing',
-    'PDF reports',
-    'Billing',
-    'Admin panel',
-]
-
-const tags = ['.NET 10', 'C#', 'React', 'TypeScript', 'PostgreSQL', 'Redis', 'three.js', 'WebAssembly', 'BIM/IFC', 'SaaS', 'Stripe', 'Docker', 'GitHub Actions']
+const tags = ['.NET', 'C#', 'React', 'TypeScript', 'PostgreSQL', 'three.js', 'BIM/IFC', 'SaaS']
 
 const openSite = () => window.open(BIMLINT_URL, '_blank', 'noopener,noreferrer')
 
@@ -149,16 +94,12 @@ const DeployedProjects = () => {
                         </div>
 
                         <p className="deployedTagline">
-                            Code-compliance review of BIM (IFC) models, right in the browser.
+                            A linter for buildings: like ESLint checks your code before a commit, BIMLint checks the model before it is submitted.
                         </p>
 
                         <p>
-                            SaaS that reads building models in IFC format (ISO 16739, the open BIM standard),
-                            extracts their elements and properties, and runs rule packs on data quality,
-                            accessibility, evacuation &amp; fire safety, habitability and zoning to detect
-                            non-compliance. Issues are shown in a 3D viewer running in the browser with
-                            WebAssembly. When a new model version is uploaded it shows which issues were
-                            resolved, which persist and which are new, and it generates reproducible PDF reports.
+                            SaaS that checks BIM models in IFC format (the open BIM standard) for data quality
+                            and building-code compliance, and shows the issues directly on the 3D model in the browser.
                         </p>
 
                         <p className="deployedMeta">
@@ -179,13 +120,39 @@ const DeployedProjects = () => {
                 </article>
 
                 <div className="deployedDetails">
-                    <div className="deployedStats">
-                        {stats.map((stat) => (
-                            <div key={stat.label} className="deployedStat">
-                                <span className="deployedStatValue">{stat.value}</span>
-                                <span className="deployedStatLabel">{stat.label}</span>
-                            </div>
-                        ))}
+                    <div className="deployedTwoCol">
+                        <div className="deployedBlock">
+                            <h4 className="deployedBlockTitle">The Problem</h4>
+                            <p className="deployedText">
+                                Construction is moving from 2D drawings to BIM models, and public procurement in Spain
+                                and Europe increasingly requires them. But having a BIM model does not mean the project
+                                complies with building codes or that the model is well built. Today it is checked by hand
+                                (days of work for a 40-home building), with expensive desktop software that small studios
+                                cannot afford, or not at all, and errors show up during permitting or on site, where
+                                fixing a staircase or an exit door costs thousands of euros.
+                            </p>
+                        </div>
+
+                        <div className="deployedBlock">
+                            <h4 className="deployedBlockTitle">The Solution</h4>
+                            <p className="deployedText">
+                                A web tool that reviews the model automatically before it is submitted: no installation,
+                                no expensive licenses and no learning curve. The user uploads the model and gets a list
+                                of issues located on the 3D view, and can track how they are fixed from one version to the next.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="deployedBlock">
+                        <h4 className="deployedBlockTitle">How It Works</h4>
+                        <div className="deployedHighlights">
+                            {steps.map((item) => (
+                                <div key={item.title} className="deployedHighlight">
+                                    <h5>{item.title}</h5>
+                                    <p>{item.text}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
                     <div className="deployedBlock">
@@ -214,25 +181,14 @@ const DeployedProjects = () => {
                         </div>
                     </div>
 
-                    <div className="deployedTwoCol">
-                        <div className="deployedBlock">
-                            <h4 className="deployedBlockTitle">
-                                <FaGlobeEurope size={16} /> Country Rule Packs
-                            </h4>
-                            <p className="deployedText">
-                                Reference values for 12 countries, including the ones below, plus a country-agnostic BIM data-quality pack.
-                            </p>
-                            <div className="githubProjectTags">
-                                {countries.map((c) => <span key={c}>{c}</span>)}
-                            </div>
-                        </div>
-
-                        <div className="deployedBlock">
-                            <h4 className="deployedBlockTitle">Features</h4>
-                            <div className="githubProjectTags">
-                                {features.map((f) => <span key={f}>{f}</span>)}
-                            </div>
-                        </div>
+                    <div className="deployedBlock">
+                        <h4 className="deployedBlockTitle">
+                            <FaGlobeEurope size={16} /> Country Rule Packs
+                        </h4>
+                        <p className="deployedText">
+                            Rule packs based on Spanish regulations (CTE) plus reference values for other
+                            countries in Europe and America.
+                        </p>
                     </div>
 
                     <p className="deployedDisclaimer">
