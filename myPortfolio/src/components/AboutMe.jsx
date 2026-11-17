@@ -25,28 +25,25 @@ const AboutMe = () => {
             <h3>Hi, I'm Borislav Georgiev</h3>
 
             <p>
-              I'm a backend-focused developer based in Sofia, Bulgaria, with a software
-              engineering background from <strong>UNED (Spain)</strong>. Server-side
-              development is where I specialize and enjoy working the most, but I'm
-              comfortable across the whole stack and can take a project from a
-              React interface down to the database when needed.
+              I'm a backend-focused full-stack developer based in Sofia, Bulgaria.
             </p>
 
             <p>
-              My core strength is backend architecture: <strong>Node.js</strong>, <strong>Express</strong> and
-              <strong> NestJS</strong> for the server side, <strong>MongoDB</strong>,
-              <strong> MySQL</strong> and <strong>PostgreSQL</strong> for data, and
-              authentication systems built with <strong>JWT</strong>, <strong>OAuth</strong> and
-              <strong> Passport</strong>. I also work with <strong>Docker</strong> and
-              <strong> Kubernetes</strong> to package and ship what I build — and when a
-              project calls for it, I build the <strong>React</strong> frontend to go with it too.
+              My <strong>primary stack is the JavaScript/TypeScript ecosystem</strong>, including
+              Node.js, NestJS, Express and React. I also have experience with{' '}
+              <strong>C# and .NET</strong> as a secondary backend stack.
             </p>
 
             <p>
-              Alongside development, I've worked as a QA on a content moderation
-              project for a multinational company, where I built a JavaScript tool
-              to automate data analysis and reporting — an experience that keeps me
-              attentive to detail and quality in everything I code.
+              I work with <strong>PostgreSQL, MySQL and MongoDB</strong>, and I'm also interested in
+              building AI-powered applications using{' '}
+              <strong>Python, LLMs, RAG and vector databases</strong>.
+            </p>
+
+            <p>
+              Alongside software development, I have professional QA experience, including building
+              JavaScript tools to automate data analysis and reporting. I enjoy solving technical
+              problems and building reliable, practical software.
             </p>
 
             <div className='aboutFactsRow'>

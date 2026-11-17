@@ -1,7 +1,9 @@
 import React from 'react'
 import '../styles/home.css'
 import '../styles/deployed.css'
-import { FaArrowRight, FaCube, FaGlobeEurope, FaExclamationTriangle } from 'react-icons/fa'
+import '../styles/skills.css'
+import '../styles/projects.css'
+import { FaArrowRight, FaCube, FaGlobeEurope, FaExclamationTriangle, FaReact, FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
 import { SiDotnet } from 'react-icons/si'
 
 const BIMLINT_URL = 'https://bimlint.com'
@@ -51,6 +53,24 @@ const stack = [
 ]
 
 const tags = ['.NET', 'C#', 'React', 'TypeScript', 'PostgreSQL', 'three.js', 'BIM/IFC', 'SaaS']
+
+// Secondary, frontend-only demos. Kept visually smaller than BIMLint on purpose.
+const demos = [
+    {
+        name: 'Movie Finder App',
+        url: 'https://moviex-react.netlify.app/',
+        repo: 'https://github.com/BorisEmilov/movieX-react',
+        description: 'Find any movie, where to watch it, its trailer and detailed information.',
+        tags: ['React', 'API Integration', 'Netlify'],
+    },
+    {
+        name: 'Apple Landing Page',
+        url: 'https://vite-iphone3d.netlify.app/',
+        repo: 'https://github.com/BorisEmilov/Iphone3D',
+        description: 'Apple-style landing page with an interactive 3D phone model.',
+        tags: ['React', 'Vite', '3D Models', 'Netlify'],
+    },
+]
 
 const openSite = () => window.open(BIMLINT_URL, '_blank', 'noopener,noreferrer')
 
@@ -199,6 +219,63 @@ const DeployedProjects = () => {
                     <button type="button" className="deployedCta" onClick={openSite}>
                         Open bimlint.com <FaArrowRight size={14} />
                     </button>
+                </div>
+            </section>
+
+            <section
+                className="projectGroup projectGroup--react deployedDemos"
+                aria-labelledby="deployed-demos-title"
+            >
+                <header className="projectGroupHeader">
+                    <div className="projectGroupIcon" aria-hidden="true">
+                        <FaReact size={22} />
+                    </div>
+                    <div>
+                        <span className="skillsEyebrow">Frontend · Live Demos</span>
+                        <h3 id="deployed-demos-title" className="projectGroupTitle">Other Live Demos</h3>
+                    </div>
+                </header>
+                <p className="deployedDemosNote">
+                    Smaller frontend projects deployed on Netlify as public demos.
+                </p>
+
+                <div className="projectGrid">
+                    {demos.map((demo) => (
+                        <article key={demo.name} className="projectItem">
+                            <div className="projectItemTop">
+                                <h4 className="projectItemTitle">{demo.name}</h4>
+                                <span className="projectItemStatus">Live Demo</span>
+                            </div>
+                            <p className="projectItemDescription">{demo.description}</p>
+                            <div className="skillsChipList">
+                                {demo.tags.map((tag) => (
+                                    <span key={tag} className="skillsChip">{tag}</span>
+                                ))}
+                            </div>
+                            <div className="deployedDemoLinks">
+                                <a
+                                    className="projectItemLink"
+                                    href={demo.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`Open ${demo.name} live demo`}
+                                >
+                                    <FaExternalLinkAlt size={12} aria-hidden="true" />
+                                    Live Demo
+                                </a>
+                                <a
+                                    className="projectItemLink"
+                                    href={demo.repo}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`View ${demo.name} repository on GitHub`}
+                                >
+                                    <FaGithub size={14} aria-hidden="true" />
+                                    Repo
+                                </a>
+                            </div>
+                        </article>
+                    ))}
                 </div>
             </section>
         </div>

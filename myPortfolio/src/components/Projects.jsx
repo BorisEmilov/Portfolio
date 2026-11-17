@@ -1,531 +1,264 @@
 import React from 'react'
 import '../styles/home.css'
-import { FaReact } from "react-icons/fa";
-import { FaNodeJs } from "react-icons/fa";
-import { FaGithub, FaArrowRight } from 'react-icons/fa'
-import { FaPython } from "react-icons/fa";
-import { IoLogoJavascript } from "react-icons/io";
-import { SiNestjs } from "react-icons/si";
+import '../styles/skills.css'
+import '../styles/projects.css'
+import { FaGithub, FaArrowRight, FaNodeJs, FaPython, FaReact, FaLock, FaExternalLinkAlt } from 'react-icons/fa'
+import { SiDotnet } from 'react-icons/si'
+import { IoLogoJavascript } from 'react-icons/io'
 
+// Projects are grouped with the same categories, numbering and accents
+// used in the Skills section, so both pages read as one story.
+const categories = [
+    {
+        index: '01',
+        label: 'Primary Specialization',
+        title: 'Node.js & TypeScript',
+        accent: 'node',
+        icon: FaNodeJs,
+        featured: true,
+        projects: [
+            {
+                id: 'project-opspulse',
+                name: 'OpsPulse System Dashboard',
+                status: 'Public Repo',
+                url: 'https://github.com/BorisEmilov/opsPulse',
+                description:
+                    'Work-order management dashboard with JWT authentication, work queues, jobs, workers and admin roles.',
+                tags: ['Express', 'React', 'JWT', 'Authentication', 'SQLite'],
+            },
+            {
+                id: 'project-workos',
+                name: 'WorkOS Backend',
+                status: 'Public Repo',
+                url: 'https://github.com/BorisEmilov/WorkOS_backend',
+                description: 'Backend to manage work orders organized by organizations, projects and tasks.',
+                tags: ['Express', 'MongoDB', 'JWT', 'BcryptJS', 'Docker', 'Helmet', 'Morgan'],
+            },
+        ],
+    },
+    {
+        index: '02',
+        label: 'Secondary Backend Stack',
+        title: '.NET & C#',
+        accent: 'dotnet',
+        icon: SiDotnet,
+        projects: [
+            {
+                id: 'project-riskdesk',
+                name: 'RiskDesk',
+                status: 'In Development',
+                url: 'https://github.com/BorisEmilov/RiskDesk',
+                description:
+                    'Fraud and anti-money-laundering (AML) risk platform for casinos and iGaming operators. The domain models players, casino events and risk alerts raised by detectors such as multi-accounting, bonus abuse, payment velocity, structuring and sanctions screening — with severity-based SLAs, an alert review workflow and a full audit trail.',
+                tags: ['C#', '.NET 10', 'ASP.NET Core', 'EF Core', 'PostgreSQL', 'Redis', 'React', 'TypeScript', 'Docker'],
+            },
+        ],
+        related: { name: 'BIMLint', note: 'deployed .NET SaaS', section: 'DeployedProjects' },
+    },
+    {
+        index: '03',
+        label: 'AI & Automation',
+        title: 'Python',
+        accent: 'python',
+        icon: FaPython,
+        projects: [
+            {
+                id: 'project-tradingai',
+                name: 'TradingAI',
+                status: 'In Development',
+                url: 'https://github.com/BorisEmilov/TradingAI',
+                description:
+                    'Autonomous AI trading system connected to MetaTrader 5. It performs technical analysis on live charts using institutional strategies (Smart Money Concepts, ICT, Elliott Wave) and executes trades based on its own predictions, with no manual intervention.',
+                tags: ['Python', 'MetaTrader 5', 'Automation', 'Algorithmic Trading', 'Technical Analysis'],
+            },
+        ],
+    },
+    {
+        index: '04',
+        label: 'Frontend Development',
+        title: 'React',
+        accent: 'react',
+        icon: FaReact,
+        projects: [
+            {
+                id: 'project-movie-finder',
+                name: 'Movie Finder App',
+                status: 'Public Repo',
+                url: 'https://github.com/BorisEmilov/movieX-react',
+                demo: 'https://moviex-react.netlify.app/',
+                description: 'Find any movie, where to watch it, its trailer and detailed information.',
+                tags: ['React', 'API Integration'],
+            },
+            {
+                id: 'project-weather',
+                name: 'Weather App',
+                status: 'Public Repo',
+                url: 'https://github.com/BorisEmilov/MyWeather',
+                description: 'Displays the weather forecast based on the user’s location.',
+                tags: ['React', 'Geolocation', 'API Integration'],
+            },
+            {
+                id: 'project-apple-landing',
+                name: 'Apple Landing Page',
+                status: 'Public Repo',
+                url: 'https://github.com/BorisEmilov/Iphone3D',
+                demo: 'https://vite-iphone3d.netlify.app/',
+                description: 'Apple-style landing page with an interactive 3D phone model.',
+                tags: ['React', '3D Models', 'Web Design'],
+            },
+            {
+                id: 'project-burger',
+                name: 'Burger Restaurant App',
+                status: 'Public Repo',
+                url: 'https://github.com/BorisEmilov/BurgerRestaurantApp',
+                description: 'Landing page for a burger restaurant.',
+                tags: ['React', 'Web Design'],
+            },
+        ],
+    },
+    {
+        index: '05',
+        label: 'Professional Tooling',
+        title: 'Automation Tools',
+        accent: 'tools',
+        icon: IoLogoJavascript,
+        projects: [
+            {
+                id: 'project-excel-tool',
+                name: 'Excel Data Analysis & Performance Tracking Tool',
+                status: 'Private Repo',
+                private: true,
+                url: 'https://github.com/BorisEmilov/DataAnalysis',
+                description:
+                    'JavaScript tool I built independently while working as a QA on a content moderation project for a multinational company. It automates data analysis and performance tracking, saving the QA team hours of manual reporting. Private for legal and confidentiality reasons.',
+                tags: ['JavaScript', 'Excel', 'Data Analysis', 'Automation'],
+            },
+        ],
+    },
+]
 
-const Projects = () => {
-  return (
-    <div className='container'>
-        <div className="sectionTitleContainer">
-                        <h2 className="sectionTitle">PROJECTS</h2>
-                        <div className="sectionTitleLine"></div>
-                    </div>
+const ProjectCard = ({ project, featured }) => (
+    <article id={project.id} className={`projectItem ${featured ? 'projectItem--featured' : ''}`}>
+        <div className="projectItemTop">
+            <h4 className="projectItemTitle">{project.name}</h4>
+            <span
+                className={`projectItemStatus ${
+                    project.status === 'In Development' ? 'projectItemStatus--dev' : ''
+                }`}
+            >
+                {project.private && <FaLock size={10} aria-hidden="true" />}
+                {project.status}
+            </span>
+        </div>
 
-                    <section className="mainProjectSection">
-                        <div className="mainProjectHeader">
-                            <span className="mainProjectMiniTitle">Currently Developing</span>
-                            <h2 className="mainProjectTitle">Main Projects</h2>
-                            <p className="projectsGithubSubtitle">
-                                The projects I'm actively building right now.
-                            </p>
-                        </div>
+        <p className="projectItemDescription">{project.description}</p>
 
-                        <article
-                            className="mainProjectCard"
-                            onClick={() => window.open('https://github.com/BorisEmilov/Capitalia', '_blank', 'noopener,noreferrer')}
+        <div className="skillsChipList">
+            {project.tags.map((tag) => (
+                <span key={tag} className="skillsChip">
+                    {tag}
+                </span>
+            ))}
+        </div>
+
+        <div className="deployedDemoLinks">
+            <a
+                className="projectItemLink"
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View ${project.name} repository on GitHub`}
+            >
+                <FaGithub size={15} aria-hidden="true" />
+                View Repo
+                <FaArrowRight size={11} aria-hidden="true" />
+            </a>
+            {project.demo && (
+                <a
+                    className="projectItemLink"
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open ${project.name} live demo`}
+                >
+                    <FaExternalLinkAlt size={12} aria-hidden="true" />
+                    Live Demo
+                </a>
+            )}
+        </div>
+    </article>
+)
+
+const Projects = ({ onNavigate }) => {
+    return (
+        <div className="container">
+            <div className="sectionTitleContainer">
+                <h2 className="sectionTitle">PROJECTS</h2>
+                <div className="sectionTitleLine"></div>
+                <p className="skillsIntro">
+                    Organized by the same stacks as my skills, so each technology can be traced to real code —
+                    starting with my main focus, <strong>Node.js backend development</strong>.
+                </p>
+            </div>
+
+            <div className="skillsLayout">
+                {categories.map((cat) => {
+                    const CatIcon = cat.icon
+                    return (
+                        <section
+                            key={cat.index}
+                            className={`projectGroup projectGroup--${cat.accent} ${
+                                cat.featured ? 'projectGroup--featured' : ''
+                            }`}
+                            aria-labelledby={`project-group-${cat.index}`}
                         >
-                            <div className="githubAccentBar mainProjectAccentBar"></div>
-
-                            <div className="githubProjectLeft">
-                                <div className="githubMainIcon">
-                                    <FaGithub size={34} />
+                            <header className="projectGroupHeader">
+                                <div className="projectGroupIcon" aria-hidden="true">
+                                    <CatIcon size={cat.featured ? 30 : 22} />
                                 </div>
-
-                                <div className="githubProjectTechIcon">
-                                    <SiNestjs size={26} />
+                                <div>
+                                    <span className={`skillsEyebrow ${cat.featured ? 'skillsEyebrowPrimary' : ''}`}>
+                                        {cat.index} · {cat.label}
+                                    </span>
+                                    <h3 id={`project-group-${cat.index}`} className="projectGroupTitle">
+                                        {cat.title}
+                                    </h3>
                                 </div>
+                                <span className="projectGroupCount">
+                                    {cat.projects.length} {cat.projects.length === 1 ? 'project' : 'projects'}
+                                </span>
+                            </header>
+
+                            <div className={`projectGrid ${cat.projects.length === 1 ? 'projectGrid--single' : ''}`}>
+                                {cat.projects.map((project) => (
+                                    <ProjectCard key={project.id} project={project} featured={cat.featured} />
+                                ))}
                             </div>
 
-                            <div className="githubProjectContent">
-                                <div className="githubProjectTop">
-                                    <h3>Capitalia</h3>
-                                    <span className="githubProjectStatus mainProjectStatus">In Development</span>
+                            {cat.related && (
+                                <div className="skillsUsedIn">
+                                    <span className="skillsUsedInLabel">Also built with this stack</span>
+                                    <button
+                                        type="button"
+                                        className="skillsProjectLink"
+                                        onClick={() => {
+                                            onNavigate?.(cat.related.section)
+                                            window.scrollTo({ top: 0, behavior: 'smooth' })
+                                        }}
+                                        aria-label={`${cat.related.name}: view in Deployed Projects`}
+                                    >
+                                        {cat.related.name}
+                                        <span className="skillsProjectNote">· {cat.related.note}</span>
+                                        <FaArrowRight size={10} aria-hidden="true" />
+                                    </button>
                                 </div>
-
-                                <p>
-                                    Investment fund, capital and personnel management platform. Capitalia handles
-                                    the administration of investment funds, tracking of capital contributions and
-                                    returns, and the personnel behind each fund, built on a secure and scalable
-                                    backend architecture.
-                                </p>
-
-                                <div className="githubProjectTags">
-                                    <span>NestJS</span>
-                                    <span>Prisma</span>
-                                    <span>PostgreSQL</span>
-                                    <span>Redis</span>
-                                    <span>JWT Auth</span>
-                                </div>
-                            </div>
-
-                            <div className="githubProjectRight">
-                                <div className="githubVisitButton">
-                                    <span>View Repo</span>
-                                    <FaArrowRight size={14} />
-                                </div>
-                            </div>
-                        </article>
-
-                        <article
-                            className="mainProjectCard"
-                            onClick={() => window.open('https://github.com/BorisEmilov/TradingAI', '_blank', 'noopener,noreferrer')}
-                        >
-                            <div className="githubAccentBar mainProjectAccentBar"></div>
-
-                            <div className="githubProjectLeft">
-                                <div className="githubMainIcon">
-                                    <FaGithub size={34} />
-                                </div>
-
-                                <div className="githubProjectTechIcon">
-                                    <FaPython size={28} />
-                                </div>
-                            </div>
-
-                            <div className="githubProjectContent">
-                                <div className="githubProjectTop">
-                                    <h3>TradingAI</h3>
-                                    <span className="githubProjectStatus mainProjectStatus">In Development</span>
-                                </div>
-
-                                <p>
-                                    Fully autonomous AI trading system that connects directly to MetaTrader 5 (MT5)
-                                    and executes trades based on institutional trading strategies, including Smart
-                                    Money Concepts (SMC), ICT, and Elliott Wave theory. It performs technical
-                                    analysis on live charts and autonomously executes trades based on its own
-                                    predictions, with no manual intervention required.
-                                </p>
-
-                                <div className="githubProjectTags">
-                                    <span>Python</span>
-                                    <span>MetaTrader 5</span>
-                                    <span>Algorithmic Trading</span>
-                                    <span>SMC / ICT</span>
-                                    <span>Elliott Wave</span>
-                                    <span>Technical Analysis</span>
-                                </div>
-                            </div>
-
-                            <div className="githubProjectRight">
-                                <div className="githubVisitButton">
-                                    <span>View Repo</span>
-                                    <FaArrowRight size={14} />
-                                </div>
-                            </div>
-                        </article>
-
-                    </section>
-
-                    <section className="projectsGithubSection">
-                        <div className="projectsGithubHeader">
-                            <span className="projectsGithubMiniTitle">Code Repositories</span>
-                            <h2 className="projectsGithubTitle">GitHub Projects</h2>
-                            <p className="projectsGithubSubtitle">
-                                All my GitHub repos
-                            </p>
-                        </div>
-        
-                        <div className="projectsGithubList">
-
-                            <article
-                                className="githubProjectCard"
-                                onClick={() => window.open('https://github.com/BorisEmilov/DataAnalysis', '_blank', 'noopener,noreferrer')}
-                            >
-                                <div className="githubAccentBar"></div>
-        
-                                <div className="githubProjectLeft">
-                                    <div className="githubMainIcon">
-                                        <FaGithub size={34} />
-                                    </div>
-        
-                                    <div className="githubProjectTechIcon">
-                                        <IoLogoJavascript size={28} />
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectContent">
-                                    <div className="githubProjectTop">
-                                        <h3>Excel Data Analysis & Performance Tracking Tool</h3>
-                                        <span className="githubProjectStatus">PRIVATE Repo</span>
-                                    </div>
-        
-                                    <p>
-                                        A JavaScript-based Excel tool I independently developed while working as a QA on a content moderation project for a multinational company. 
-                                        It automates data analysis and performance tracking, 
-                                        helping the QA team save hours of manual calculation and reporting work. The repository is private for legal and confidentiality reasons.
-                                    </p>
-        
-                                    <div className="githubProjectTags">
-                                        <span>JavaScript</span>
-                                        <span>Excell</span>
-                                        <span>Data Analisys</span>
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectRight">
-                                    <div className="githubVisitButton">
-                                        <span>View Repo</span>
-                                        <FaArrowRight size={14} />
-                                    </div>
-                                </div>
-                            </article>
-        
-                            <article
-                                className="githubProjectCard"
-                                onClick={() => window.open('https://github.com/BorisEmilov/CapstoneProject_MERN', '_blank', 'noopener,noreferrer')}
-                            >
-                                <div className="githubAccentBar"></div>
-        
-                                <div className="githubProjectLeft">
-                                    <div className="githubMainIcon">
-                                        <FaGithub size={34} />
-                                    </div>
-        
-                                    <div className="githubProjectTechIcon">
-                                        <FaNodeJs size={28} />
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectContent">
-                                    <div className="githubProjectTop">
-                                        <h3>MERN Capstone Project</h3>
-                                        <span className="githubProjectStatus">Public Repo</span>
-                                    </div>
-        
-                                    <p>
-                                        Project made mainly for Backend, 
-                                        The frontend is not fully finished as the focus was on Backend tecnologies
-                                    </p>
-        
-                                    <div className="githubProjectTags">
-                                        <span>React</span>
-                                        <span>Redux</span>
-                                        <span>CSS</span>
-                                        <span>Responsive</span>
-                                        <span>Express</span>
-                                        <span>MongoDB</span>
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectRight">
-                                    <div className="githubVisitButton">
-                                        <span>View Repo</span>
-                                        <FaArrowRight size={14} />
-                                    </div>
-                                </div>
-                            </article>
-        
-                            <article
-                                className="githubProjectCard"
-                                onClick={() => window.open('https://github.com/BorisEmilov/opsPulse', '_blank', 'noopener,noreferrer')}
-                            >
-                                <div className="githubAccentBar"></div>
-        
-                                <div className="githubProjectLeft">
-                                    <div className="githubMainIcon">
-                                        <FaGithub size={34} />
-                                    </div>
-        
-                                    <div className="githubProjectTechIcon">
-                                        <FaNodeJs size={28} />
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectContent">
-                                    <div className="githubProjectTop">
-                                        <h3>OpsPulse system Dashboard</h3>
-                                        <span className="githubProjectStatus">Public Repo</span>
-                                    </div>
-        
-                                    <p>
-                                        Dashboard that integrates JWT authentication, integreate work Queues, Jobs, Workers and Admins.
-                                    </p>
-                                    <p>
-                                        This project is orientated to work orders management.
-                                    </p>
-        
-                                    <div className="githubProjectTags">
-                                        <span>React</span>
-                                        <span>Express</span>
-                                        <span>JWT</span>
-                                        <span>Authentication</span>
-                                        <span>SQLITE3</span>
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectRight">
-                                    <div className="githubVisitButton">
-                                        <span>View Repo</span>
-                                        <FaArrowRight size={14} />
-                                    </div>
-                                </div>
-                            </article>
-        
-                            <article
-                                className="githubProjectCard"
-                                onClick={() => window.open('https://github.com/BorisEmilov/WorkOS_backend', '_blank', 'noopener,noreferrer')}
-                            >
-                                <div className="githubAccentBar"></div>
-        
-                                <div className="githubProjectLeft">
-                                    <div className="githubMainIcon">
-                                        <FaGithub size={34} />
-                                    </div>
-        
-                                    <div className="githubProjectTechIcon">
-                                        <FaNodeJs size={28} />
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectContent">
-                                    <div className="githubProjectTop">
-                                        <h3>WorkOS Backend</h3>
-                                        <span className="githubProjectStatus">Public Repo</span>
-                                    </div>
-        
-                                    <p>
-                                        System to manage work orders based on organizations, projects and tasks
-                                    </p>
-        
-                                    <div className="githubProjectTags">
-                                        <span>MongoDB</span>
-                                        <span>JWT</span>
-                                        <span>Express</span>
-                                        <span>BcryptJS</span>
-                                        <span>Docker</span>
-                                        <span>Helmet</span>
-                                        <span>Morgan</span>
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectRight">
-                                    <div className="githubVisitButton">
-                                        <span>View Repo</span>
-                                        <FaArrowRight size={14} />
-                                    </div>
-                                </div>
-                            </article>
-        
-                             <article
-                                className="githubProjectCard"
-                                onClick={() => window.open('https://github.com/BorisEmilov/socialMedia_backend', '_blank', 'noopener,noreferrer')}
-                            >
-                                <div className="githubAccentBar"></div>
-        
-                                <div className="githubProjectLeft">
-                                    <div className="githubMainIcon">
-                                        <FaGithub size={34} />
-                                    </div>
-        
-                                    <div className="githubProjectTechIcon">
-                                        <FaNodeJs size={28} />
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectContent">
-                                    <div className="githubProjectTop">
-                                        <h3>Social media Backend</h3>
-                                        <span className="githubProjectStatus">Public Repo</span>
-                                    </div>
-        
-                                    <p>
-                                        Functionality: register / login / user info/ update user fields / follow - unfollow
-                                        users / get followares / get users posts / create posts / delete posts
-                                    </p>
-        
-                                    <div className="githubProjectTags">
-                                        <span>MongoDB</span>
-                                        <span>JWT</span>
-                                        <span>Express</span>
-                                        <span>BcryptJS</span>
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectRight">
-                                    <div className="githubVisitButton">
-                                        <span>View Repo</span>
-                                        <FaArrowRight size={14} />
-                                    </div>
-                                </div>
-                            </article>
-        
-        
-                            <article
-                                className="githubProjectCard"
-                                onClick={() => window.open('https://github.com/BorisEmilov/BurgerRestaurantApp', '_blank', 'noopener,noreferrer')}
-                            >
-                                <div className="githubAccentBar"></div>
-        
-                                <div className="githubProjectLeft">
-                                    <div className="githubMainIcon">
-                                        <FaGithub size={34} />
-                                    </div>
-        
-                                    <div className="githubProjectTechIcon">
-                                        <FaReact size={28} />
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectContent">
-                                    <div className="githubProjectTop">
-                                        <h3>Burger Restaurant APP</h3>
-                                        <span className="githubProjectStatus">Public Repo</span>
-                                    </div>
-        
-                                    <p>
-                                        Landing page for a Burger Restaurant
-                                    </p>
-        
-                                    <div className="githubProjectTags">
-                                        <span>React</span>
-                                        <span>web design</span>
-                                        <span>frontend</span>
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectRight">
-                                    <div className="githubVisitButton">
-                                        <span>View Repo</span>
-                                        <FaArrowRight size={14} />
-                                    </div>
-                                </div>
-                            </article>
-        
-                            <article
-                                className="githubProjectCard"
-                                onClick={() => window.open('https://github.com/BorisEmilov/MyWeather', '_blank', 'noopener,noreferrer')}
-                            >
-                                <div className="githubAccentBar"></div>
-        
-                                <div className="githubProjectLeft">
-                                    <div className="githubMainIcon">
-                                        <FaGithub size={34} />
-                                    </div>
-        
-                                    <div className="githubProjectTechIcon">
-                                        <FaReact size={28} />
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectContent">
-                                    <div className="githubProjectTop">
-                                        <h3>Weather APP</h3>
-                                        <span className="githubProjectStatus">Public Repo</span>
-                                    </div>
-        
-                                    <p>
-                                        App that displays the weather pronostic based on your location
-                                    </p>
-        
-                                    <div className="githubProjectTags">
-                                        <span>React</span>
-                                        <span>web design</span>
-                                        <span>Geolocation</span>
-                                        <span>API fetching</span>
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectRight">
-                                    <div className="githubVisitButton">
-                                        <span>View Repo</span>
-                                        <FaArrowRight size={14} />
-                                    </div>
-                                </div>
-                            </article>
-        
-                            <article
-                                className="githubProjectCard"
-                                onClick={() => window.open('https://github.com/BorisEmilov/movieX-react', '_blank', 'noopener,noreferrer')}
-                            >
-                                <div className="githubAccentBar"></div>
-        
-                                <div className="githubProjectLeft">
-                                    <div className="githubMainIcon">
-                                        <FaGithub size={34} />
-                                    </div>
-        
-                                    <div className="githubProjectTechIcon">
-                                        <FaReact size={28} />
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectContent">
-                                    <div className="githubProjectTop">
-                                        <h3>Movie Finder App</h3>
-                                        <span className="githubProjectStatus">Public Repo</span>
-                                    </div>
-        
-                                    <p>
-                                        App to find any movie, where to see it, trailer, an much more information abouth any movie
-                                    </p>
-        
-                                    <div className="githubProjectTags">
-                                        <span>React</span>
-                                        <span>web design</span>
-                                        <span>Frontend</span>
-                                        <span>API fetching</span>
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectRight">
-                                    <div className="githubVisitButton">
-                                        <span>View Repo</span>
-                                        <FaArrowRight size={14} />
-                                    </div>
-                                </div>
-                            </article>
-        
-                            <article
-                                className="githubProjectCard"
-                                onClick={() => window.open('https://github.com/BorisEmilov/Iphone3D', '_blank', 'noopener,noreferrer')}
-                            >
-                                <div className="githubAccentBar"></div>
-        
-                                <div className="githubProjectLeft">
-                                    <div className="githubMainIcon">
-                                        <FaGithub size={34} />
-                                    </div>
-        
-                                    <div className="githubProjectTechIcon">
-                                        <FaReact size={28} />
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectContent">
-                                    <div className="githubProjectTop">
-                                        <h3>Apple Landing page</h3>
-                                        <span className="githubProjectStatus">Public Repo</span>
-                                    </div>
-        
-                                    <p>
-                                        Apple landing page with 3D interactive phone model
-                                    </p>
-        
-                                    <div className="githubProjectTags">
-                                        <span>React</span>
-                                        <span>web design</span>
-                                        <span>Frontend</span>
-                                        <span>3D models</span>
-                                    </div>
-                                </div>
-        
-                                <div className="githubProjectRight">
-                                    <div className="githubVisitButton">
-                                        <span>View Repo</span>
-                                        <FaArrowRight size={14} />
-                                    </div>
-                                </div>
-                            </article>
-        
-                        </div>
-                    </section>
-    </div>
-  )
+                            )}
+                        </section>
+                    )
+                })}
+            </div>
+        </div>
+    )
 }
 
 export default Projects

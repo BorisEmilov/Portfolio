@@ -17,11 +17,11 @@ function App() {
             case 'AboutMe':
                 return <AboutMe />
             case 'Skills':
-                return <Skills />
+                return <Skills onNavigate={setActiveSection} />
             case 'Certificates':
                 return <Certificates />
             case 'Projects':
-                return <Projects />
+                return <Projects onNavigate={setActiveSection} />
             case 'DeployedProjects':
                 return <DeployedProjects />
             case 'ContactMe':
