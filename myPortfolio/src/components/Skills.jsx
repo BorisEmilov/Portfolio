@@ -31,6 +31,7 @@ const primary = {
         { name: 'Backend Architecture', icon: TbStack2 },
     ],
     usedIn: [
+        { name: 'RiskDesk', section: 'Projects', target: 'project-riskdesk' },
         { name: 'OpsPulse', section: 'Projects', target: 'project-opspulse' },
         { name: 'WorkOS Backend', section: 'Projects', target: 'project-workos' },
     ],
@@ -47,8 +48,7 @@ const secondary = [
         items: ['C#', '.NET', 'ASP.NET Core', 'Entity Framework Core', 'Web APIs', 'Layered Architecture'],
         itemIcons: { 'C#': TbBrandCSharp, '.NET': SiDotnet, 'ASP.NET Core': SiDotnet, 'Entity Framework Core': BsDatabaseGear },
         usedIn: [
-            { name: 'BIMLint', note: 'production SaaS', section: 'DeployedProjects' },
-            { name: 'RiskDesk', section: 'Projects', target: 'project-riskdesk' },
+            { name: 'BIMLint', note: 'production SaaS', section: 'Projects', target: 'project-bimlint' },
         ],
     },
     {

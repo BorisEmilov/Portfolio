@@ -18,6 +18,15 @@ const categories = [
         featured: true,
         projects: [
             {
+                id: 'project-riskdesk',
+                name: 'RiskDesk',
+                status: 'In Development',
+                url: 'https://github.com/BorisEmilov/RiskDesk',
+                description:
+                    'Fraud and anti-money-laundering (AML) risk platform for casinos and iGaming operators. The domain models players, casino events and risk alerts raised by detectors such as multi-accounting, bonus abuse, payment velocity, structuring and sanctions screening — with severity-based SLAs, an alert review workflow and a full audit trail.',
+                tags: ['TypeScript', 'Node.js', 'Express', 'React', 'PostgreSQL', 'Redis'],
+            },
+            {
                 id: 'project-opspulse',
                 name: 'OpsPulse System Dashboard',
                 status: 'Public Repo',
@@ -44,16 +53,17 @@ const categories = [
         icon: SiDotnet,
         projects: [
             {
-                id: 'project-riskdesk',
-                name: 'RiskDesk',
-                status: 'In Development',
-                url: 'https://github.com/BorisEmilov/RiskDesk',
+                id: 'project-bimlint',
+                name: 'BIMLint',
+                status: 'Live',
+                featured: true,
+                demo: 'https://bimlint.com',
+                demoLabel: 'Visit bimlint.com',
                 description:
-                    'Fraud and anti-money-laundering (AML) risk platform for casinos and iGaming operators. The domain models players, casino events and risk alerts raised by detectors such as multi-accounting, bonus abuse, payment velocity, structuring and sanctions screening — with severity-based SLAs, an alert review workflow and a full audit trail.',
-                tags: ['C#', '.NET 10', 'ASP.NET Core', 'EF Core', 'PostgreSQL', 'Redis', 'React', 'TypeScript', 'Docker'],
+                    'A linter for buildings: like ESLint checks your code before a commit, BIMLint checks the BIM model before it is submitted. It runs configurable JSON rule packs over IFC files — data quality, information requirements and building-code checks — shows issues on the 3D model in the browser and compares versions. Production SaaS with background processing, live progress via SignalR, teams, Stripe subscriptions and PDF reports.',
+                tags: ['C#', '.NET Core', 'ASP.NET Core', 'EF Core', 'SignalR', 'Hangfire', 'PostgreSQL', 'Redis', 'React', 'TypeScript', 'three.js', 'Docker'],
             },
         ],
-        related: { name: 'BIMLint', note: 'deployed .NET SaaS', section: 'DeployedProjects' },
     },
     {
         index: '03',
@@ -138,7 +148,7 @@ const categories = [
 ]
 
 const ProjectCard = ({ project, featured }) => (
-    <article id={project.id} className={`projectItem ${featured ? 'projectItem--featured' : ''}`}>
+    <article id={project.id} className={`projectItem ${featured || project.featured ? 'projectItem--featured' : ''}`}>
         <div className="projectItemTop">
             <h4 className="projectItemTitle">{project.name}</h4>
             <span
@@ -162,17 +172,19 @@ const ProjectCard = ({ project, featured }) => (
         </div>
 
         <div className="deployedDemoLinks">
-            <a
-                className="projectItemLink"
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`View ${project.name} repository on GitHub`}
-            >
-                <FaGithub size={15} aria-hidden="true" />
-                View Repo
-                <FaArrowRight size={11} aria-hidden="true" />
-            </a>
+            {project.url && (
+                <a
+                    className="projectItemLink"
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`View ${project.name} repository on GitHub`}
+                >
+                    <FaGithub size={15} aria-hidden="true" />
+                    View Repo
+                    <FaArrowRight size={11} aria-hidden="true" />
+                </a>
+            )}
             {project.demo && (
                 <a
                     className="projectItemLink"
@@ -182,7 +194,7 @@ const ProjectCard = ({ project, featured }) => (
                     aria-label={`Open ${project.name} live demo`}
                 >
                     <FaExternalLinkAlt size={12} aria-hidden="true" />
-                    Live Demo
+                    {project.demoLabel || 'Live Demo'}
                 </a>
             )}
         </div>
@@ -224,16 +236,20 @@ const Projects = ({ onNavigate }) => {
                                         {cat.title}
                                     </h3>
                                 </div>
-                                <span className="projectGroupCount">
-                                    {cat.projects.length} {cat.projects.length === 1 ? 'project' : 'projects'}
-                                </span>
+                                {cat.projects.length > 0 && (
+                                    <span className="projectGroupCount">
+                                        {cat.projects.length} {cat.projects.length === 1 ? 'project' : 'projects'}
+                                    </span>
+                                )}
                             </header>
 
-                            <div className={`projectGrid ${cat.projects.length === 1 ? 'projectGrid--single' : ''}`}>
-                                {cat.projects.map((project) => (
-                                    <ProjectCard key={project.id} project={project} featured={cat.featured} />
-                                ))}
-                            </div>
+                            {cat.projects.length > 0 && (
+                                <div className={`projectGrid ${cat.projects.length === 1 ? 'projectGrid--single' : ''}`}>
+                                    {cat.projects.map((project) => (
+                                        <ProjectCard key={project.id} project={project} featured={cat.featured} />
+                                    ))}
+                                </div>
+                            )}
 
                             {cat.related && (
                                 <div className="skillsUsedIn">
